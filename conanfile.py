@@ -9,7 +9,7 @@ class GlfwConan(ConanFile):
     description = "The GLFW library - Builds on Windows, Linux and Macos/OSX"
     settings = "os", "arch", "build_type", "compiler"
     options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = {'shared': False, "fPIC": True}
+    default_options = {'shared': False, "fPIC": True, 'libxcb:shared': True, 'libx11:shared': True }
     license = "Zlib"
     url = "https://github.com/bincrafters/conan-glfw"
     homepage = "https://github.com/glfw/glfw"
