@@ -8,8 +8,8 @@ class GlfwConan(ConanFile):
     version = "3.3.2"
     description = "The GLFW library - Builds on Windows, Linux and Macos/OSX"
     settings = "os", "arch", "build_type", "compiler"
-    options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = {'shared': False, "fPIC": True, 'libxcb:shared': True, 'libx11:shared': True }
+    options = {"shared": [True, False], "fPIC": [True, False], "vulkanStatic": [True, False]}
+    default_options = {'shared': False, "fPIC": True, 'libxcb:shared': True, 'libx11:shared': True, 'vulkanStatic': False }
     license = "Zlib"
     url = "https://github.com/bincrafters/conan-glfw"
     homepage = "https://github.com/glfw/glfw"
@@ -48,6 +48,8 @@ class GlfwConan(ConanFile):
         cmake.definitions["GLFW_BUILD_EXAMPLES"] = False
         cmake.definitions["GLFW_BUILD_TESTS"] = False
         cmake.definitions["GLFW_BUILD_DOCS"] = False
+        if self.options.vulkanStatic:
+            cmake.definitions["GLFW_VULKAN_STATIC"] = True
         cmake.configure(build_dir=self._build_subfolder)
         return cmake
 
